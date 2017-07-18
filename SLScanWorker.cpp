@@ -124,9 +124,9 @@ void SLScanWorker::setup(){
     CalibrationData calibration;
     calibration.load("calibration.xml");
 
-    //cv::Mat map1, map2;
-    //cv::Size mapSize = cv::Size(screenCols, screenRows);
-    //cvtools::initDistortMap(calibration.Kp, calibration.kp, mapSize, map1, map2);
+	//cv::Mat map1, map2;
+	//cv::Size mapSize = cv::Size(screenCols, screenRows);
+	//cvtools::initDistortMap(calibration.Kp, calibration.kp, mapSize, map1, map2);
 
     // Upload patterns to projector/GPU in full projector resolution
     for(unsigned int i=0; i<encoder->getNPatterns(); i++){
@@ -246,6 +246,7 @@ void SLScanWorker::doWork(){
 
         // Increase iteration counter
         k += 1;
+		std::cerr << "SLScanWorker: k=" << k << std::endl;
         // Process events to e.g. check for exit flag
         QCoreApplication::processEvents();
 

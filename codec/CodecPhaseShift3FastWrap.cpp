@@ -49,9 +49,9 @@ void DecoderPhaseShift3FastWrap::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat 
         for(int c=0; c<up.cols; c++){
 
 
-            float f0 = frames[0].at<unsigned short>(r,c);
-            float f1 = frames[1].at<unsigned short>(r,c);
-            float f2 = frames[2].at<unsigned short>(r,c);
+            float f0 = frames[0].at<unsigned char>(r,c);
+			float f1 = frames[1].at<unsigned char>(r,c);
+			float f2 = frames[2].at<unsigned char>(r,c);
 
             if(f0 > f1){
                 if(f1 > f2){

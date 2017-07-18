@@ -26,7 +26,7 @@ EncoderPhaseShift3Unwrap::EncoderPhaseShift3Unwrap(unsigned int _screenCols, uns
         float phase = 2.0*pi/3.0 * i;
         float pitch = (float)screenCols/(float)nPhases;
         cv::Mat patternI(1,1,CV_8U);
-        patternI = pstools::computePhaseVector(screenCols, phase, pitch);
+		patternI = pstools::computePhaseVector(screenCols, phase, pitch);
         patterns.push_back(patternI.t());
     }
 
