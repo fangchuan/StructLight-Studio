@@ -48,7 +48,6 @@ cv::Mat getMagnitude(const cv::Mat I1, const cv::Mat I2, const cv::Mat I3){
     cv::Mat_<float> I3_(I3);
 
     cv::Mat magnitude;
-
     // One call approach
     cv::magnitude(2.0*I1_-I2_-I3_, sqrt(3.0)*(I2_-I3_), magnitude);
     magnitude.convertTo(magnitude, CV_8U);
