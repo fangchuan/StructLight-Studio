@@ -8,3 +8,7 @@
 2017-07-18：测试3PhaseShift、4PhaseShift、NPhaseShift正常工作
 			3PhaseShiftUnwrap一直无点云图像输出，不知道是否解相的问题
 			修正3PhaseShiftFastWrap的段错误
+
+2017-07-20：修正3PhaseShiftUnwrap问题
+	    多次出现显示异常，重建模型也都不对了，depth图也不清楚
+	    多处抛出异常。。。
