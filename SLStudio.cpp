@@ -254,12 +254,14 @@ void SLStudio::closeEvent(QCloseEvent *event){
     settings->setValue("geometry/shading", shadingDialog->saveGeometry());
     settings->setValue("geometry/decoderUp", decoderUpDialog->saveGeometry());
     settings->setValue("geometry/decoderVp", decoderVpDialog->saveGeometry());
+	settings->setValue("geometry/depth", depthDialog->saveGeometry());
 
     // Store Visibility
     settings->setValue("visible/histogram", histogramDialog->isVisible());
     settings->setValue("visible/shading", shadingDialog->isVisible());
     settings->setValue("visible/decoderUp", decoderUpDialog->isVisible());
     settings->setValue("visible/decoderVp", decoderVpDialog->isVisible());
+	settings->setValue("visible/depth", depthDialog->isVisible());
 
     // Store data for trackerDialog (temp)
     settings->setValue("geometry/trackerDialog", trackerDialog->saveGeometry());
