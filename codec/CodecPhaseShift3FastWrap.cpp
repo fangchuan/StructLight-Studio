@@ -47,8 +47,6 @@ void DecoderPhaseShift3FastWrap::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat 
     // Wrap phase using Zhang's intensity ratio (w/o correction)
     for(int r=0; r<up.rows; r++){
         for(int c=0; c<up.cols; c++){
-
-
             float f0 = frames[0].at<unsigned char>(r,c);
 			float f1 = frames[1].at<unsigned char>(r,c);
 			float f2 = frames[2].at<unsigned char>(r,c);
@@ -78,15 +76,11 @@ void DecoderPhaseShift3FastWrap::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat 
             }
         }
     }
-
 //    cvtools::writeMat(up, "up.mat");
-
     up *= screenCols/(2*pi);
-
     cv::GaussianBlur(up, up, cv::Size(0,0), 3, 3);
 
 //    shading = pstools::getMagnitude(frames[0], frames[1], frames[2]);
-
     shading = cv::max(frames[0], frames[1]);
     shading = cv::max(shading, frames[2]);
 
