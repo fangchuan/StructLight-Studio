@@ -55,7 +55,7 @@ void SLVideoWidget::showFrame(CameraFrame frame){
     pixmap = QPixmap::fromImage(img);
     this->setPixmap(pixmap.scaled(w,h,Qt::KeepAspectRatio));
 
-    QCoreApplication::processEvents();
+    //QCoreApplication::processEvents();
 
 }
 
@@ -70,7 +70,7 @@ void SLVideoWidget::showFrameCV(cv::Mat frame){
     pixmap = QPixmap::fromImage(qimage);
     this->setPixmap(pixmap.scaled(w,h,Qt::KeepAspectRatio));
 
-    QCoreApplication::processEvents();
+    //QCoreApplication::processEvents();
 
 }
 
