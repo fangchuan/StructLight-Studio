@@ -117,9 +117,9 @@ void DecoderPhaseShift2x3::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat &mask,
     // Threshold modulation image for mask
     mask = shading > 55;
 //cvtools::writeMat(mask, "mask.mat");
-//    cv::Mat edges;
-//    cv::Sobel(up, edges, -1, 1, 1, 7);
-//    edges = abs(edges) < 200;
+    //cv::Mat edges;
+    //cv::Sobel(up, edges, -1, 1, 1, 7);
+    //edges = abs(edges) < 200;
 
 //    cv::Mat strel = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(3,3));
 //    cv::dilate(edges, edges, strel);

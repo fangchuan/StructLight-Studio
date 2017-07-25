@@ -246,7 +246,7 @@ void SLScanWorker::doWork(){
 
         // Increase iteration counter
         k += 1;
-		std::cerr << "SLScanWorker: k=" << k << std::endl;
+		//std::cerr << "SLScanWorker: k=" << k << std::endl;
         // Process events to e.g. check for exit flag
         QCoreApplication::processEvents();
 

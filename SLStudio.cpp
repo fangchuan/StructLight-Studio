@@ -101,8 +101,8 @@ void SLStudio::onShowDecoderVp(cv::Mat im){
 }
 
 void SLStudio::onShowDepth(cv::Mat im){
-if(depthDialog->isVisible())
-    depthDialog->showImageCV(im);
+	if(depthDialog->isVisible())
+		depthDialog->showImageCV(im);
 }
 
 void SLStudio::onActionStart(){
@@ -155,8 +155,6 @@ void SLStudio::onActionStart(){
     scanWorkerThread->start(QThread::TimeCriticalPriority);
 
     // Setup and start processing
-    //QMetaObject::invokeMethod(decoderWorker, "setup");
-    //QMetaObject::invokeMethod(triangulatorWorker, "setup");
     QMetaObject::invokeMethod(scanWorker, "setup");
     QMetaObject::invokeMethod(scanWorker, "doWork");
     time->start();
