@@ -57,8 +57,8 @@ void DecoderPhaseShift3Unwrap::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat &m
     shading = pstools::getMagnitude(frames[0], frames[1], frames[2]);
 
     // Create mask from modulation image
-    mask = shading > 25;\
-
+    mask = shading > 25;
+	cvtools::writeMat(mask, "mask.mat", "mask");
     // Unwrap multiple phase image
     cv::Mat quality = phaseunwrap::createqualitymap(up, mask);
 
@@ -66,7 +66,7 @@ void DecoderPhaseShift3Unwrap::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat &m
     cv::GaussianBlur(quality, quality, cv::Size(0,0), 3, 3);
 
     //cvtools::imshow("quality", quality, 0, 0);
-//cvtools::writeMat(quality, "quality.mat", "quality");
+	cvtools::writeMat(quality, "quality.mat", "quality");
 
     std::vector<float> thresholds = phaseunwrap::computethresholds(quality, mask);
 
