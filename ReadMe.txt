@@ -16,3 +16,6 @@
 2017-07-25：修正线程异常：SLVideoDialog 注释QCoreApplication::processEvents()
 			修正3PhaseShiftUnwrap的Mat使用错误
 			经测试，只有4相移编码器下会出现点云模型一闪而过的情况，3\3F\3U\N\2X3在QVTK中正常显示
+			
+2017-08-01： 修复4相移编码器产生的点云模型一闪而过的现象，系mask值不当造成
+			 是否每个编码器调整mask值可以产生较少噪声的点云模型？？？
