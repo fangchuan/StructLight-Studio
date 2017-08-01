@@ -58,7 +58,7 @@ void DecoderPhaseShift4::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat &mask, c
 
     // Threshold on high modulation and low energy at wrong frequencies
     //mask = (X1/X0 > 0.30) & (X1 > 100) & (X2 < 50);
-    mask = X1 > 4;
+    mask = X1 > 20;
 
     cv::Mat dx, dy;
     cv::Sobel(up, dx, -1, 1, 0, 3);
@@ -66,7 +66,7 @@ void DecoderPhaseShift4::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat &mask, c
     cv::Mat edges;
     cv::magnitude(dx, dy, edges);
 
-    //mask = mask & (abs(edges) < 75);
+    mask = mask & (abs(edges) < 75);
 
     shading = X1;
     shading.convertTo(shading, CV_8U);
