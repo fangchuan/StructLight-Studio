@@ -31,7 +31,7 @@ SLPointCloudWidget::SLPointCloudWidget(QWidget *parent) : QVTKWidget(parent), su
 
     visualizer = new pcl::visualization::PCLVisualizer("PCLVisualizer", false);
     this->SetRenderWindow(visualizer->getRenderWindow());
-
+	visualizer->setupInteractor(this->GetInteractor(), this->GetRenderWindow());
     // Disable double buffering (which is enabled per default in VTK6)
     visualizer->getRenderWindow()->SetDoubleBuffer(0);
     visualizer->getRenderWindow()->SetErase(1);
@@ -126,8 +126,8 @@ void SLPointCloudWidget::updatePointCloud(PointCloudConstPtr _pointCloudPCL){
         // Note: using the color handler makes a copy of the rgb fields
         colorHandler->setInputCloud(pointCloudPCL);
         if(!visualizer->updatePointCloud(pointCloudPCL, *colorHandler, "pointCloudPCL")){
-            visualizer->addPointCloud(pointCloudPCL, *colorHandler, "pointCloudPCL");
-            //visualizer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1.0, "pointCloudPCL");
+			visualizer->addPointCloud(pointCloudPCL, *colorHandler, "pointCloudPCL");
+			visualizer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1.0, "pointCloudPCL");
          }
     }
 
