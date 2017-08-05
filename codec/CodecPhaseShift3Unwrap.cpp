@@ -64,20 +64,11 @@ void DecoderPhaseShift3Unwrap::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat &m
 
     // Blurred quality map
     cv::GaussianBlur(quality, quality, cv::Size(0,0), 3, 3);
-
-    //cvtools::imshow("quality", quality, 0, 0);
 	cvtools::writeMat(quality, "quality.mat", "quality");
-
     std::vector<float> thresholds = phaseunwrap::computethresholds(quality, mask);
 
-//    for(int i=0; i<3; i++)
-//        std::cout << thresholds[i] << " ";
-//    std::cout << std::endl;
-//cvtools::writeMat(up, "up.mat", "up");
 //    // Unwrap absolute phase
     phaseunwrap::unwrap(up, quality, mask, thresholds);
-//cvtools::writeMat(up, "up.mat", "up");
-//cvtools::writeMat(mask, "mask.mat", "mask");
 
     up += 3.0*2.0*pi;
     up *= screenCols/(2.0*pi*nPhases);

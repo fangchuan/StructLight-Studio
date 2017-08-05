@@ -69,7 +69,7 @@ void DecoderPhaseShift3::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat &mask, c
 
     shading = pstools::getMagnitude(frames[0], frames[1], frames[2]);
 
-    cv::Mat avg = 0.333*frames[0] + 0.333*frames[1] + 0.333*frames[2];
+    //cv::Mat avg = 0.333*frames[0] + 0.333*frames[1] + 0.333*frames[2];
 
     // Create mask from modulation image and erode
     mask.create(shading.size(), cv::DataType<bool>::type);

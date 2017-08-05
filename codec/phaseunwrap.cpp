@@ -38,7 +38,7 @@ cv::Mat createqualitymap(const cv::Mat phase, const cv::Mat mask){
         for(int c = 1; c < phase.cols - 1; c++){
 
             // If this pixel should be processed
-            if(mask.at<unsigned char>(r,c) == 255){
+            if(mask.at<bool>(r,c) == 255){
 
                 // Compute wrapped phase differences
                 up = std::fabs(wrapphasedifference(phase.at<float>(r,c), phase.at<float>(r-1,c)));
@@ -67,7 +67,7 @@ std::vector<float> computethresholds(cv::Mat quality, const cv::Mat mask){
     for(int r = 0; r < quality.rows; r++){
         for(int c = 0; c < quality.cols; c++){
 
-            if(mask.at<unsigned char>(r,c) == 255){
+            if(mask.at<bool>(r,c) == 255){
                 meanValue += quality.at<float>(r,c);
                 numVals++;
             }
@@ -79,7 +79,7 @@ std::vector<float> computethresholds(cv::Mat quality, const cv::Mat mask){
     for(int r = 0; r < quality.rows; r++){
         for(int c = 0; c < quality.cols; c++){
 
-            if(mask.at<unsigned char>(r,c) == 255)
+            if(mask.at<bool>(r,c) == 255)
                 stdDev += (quality.at<float>(r,c) - meanValue) * (quality.at<float>(r,c) - meanValue);
         }
     }
@@ -119,7 +119,7 @@ void unwrappatch(cv::Mat phase, cv::Mat quality, cv::Mat mask, cv::Mat phOffset,
         for(int c = ptStart.x; c != borderX-1; c += stepX){
 
             // If the quality is in the current level
-            if((mask.at<unsigned char>(r,c) == 255) && (quality.at<float>(r,c) <= threshold)){
+            if((mask.at<bool>(r,c) == 255) && (quality.at<float>(r,c) <= threshold)){
 
                 // Try to unwrap from first start facing pixel
                 if(quality.at<float>(r,c-stepX) == VAL_UNWRAPPED){
@@ -138,7 +138,7 @@ void unwrappatch(cv::Mat phase, cv::Mat quality, cv::Mat mask, cv::Mat phOffset,
                     } else {
                         // If it wasn't able to unwrap from any start facing pixel, check border facing pixels and
                         // if there's valid one, add current pixel to the leftovers
-                        if((mask.at<unsigned char>(r,c+stepX) == 255) || (mask.at<unsigned char>(r+stepY,c) == 255) )
+                        if((mask.at<bool>(r,c+stepX) == 255) || (mask.at<bool>(r+stepY,c) == 255) )
                             remainders.push_back(cv::Point2i(c,r));
                     }
                 }
@@ -214,11 +214,11 @@ void unwrap(cv::Mat phase, cv::Mat quality, cv::Mat mask, const std::vector<floa
 
                 // Unwrap this pixel's phase
                 phase.at<float>(r,c) += phOffset.at<float>(r,c)*2.0*M_PI;
-                mask.at<unsigned char>(r,c) = 255;
+                mask.at<bool>(r,c) = 255;
             } else {
-                //mask.at<float>(r,c) = false;
+                mask.at<bool>(r,c) = 0;
                 // If this pixel was not unwrapped, set it's phase to 0
-                //phase.at<float>(r,c) = 0;
+                phase.at<float>(r,c) = 0;
             }
         }
     }

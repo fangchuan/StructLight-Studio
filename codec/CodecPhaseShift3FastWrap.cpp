@@ -88,11 +88,11 @@ void DecoderPhaseShift3FastWrap::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat 
     mask.create(shading.size(), cv::DataType<bool>::type);
     mask = (shading > 15) & (shading < 254);
 
-//    cv::Mat edges;
-//    cv::Sobel(up, edges, -1, 1, 1, 7);
-//    edges = abs(edges) < 500;
-//    cv::erode(edges, edges, cv::Mat());
-
-//    mask = mask & edges;
+// 	cv::Mat edges;
+// 	cv::Sobel(up, edges, -1, 1, 1, 7);
+// 	edges = abs(edges) < 250;
+// 	cv::erode(edges, edges, cv::Mat());
+// 
+// 	mask = mask & edges;
 
 }

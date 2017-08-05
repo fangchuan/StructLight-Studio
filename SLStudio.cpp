@@ -18,9 +18,17 @@
 
 using namespace std;
 
-SLStudio::SLStudio(QWidget *parent) : QMainWindow(parent), ui(new Ui::SLStudio),
-        scanWorkerThread(NULL), settings(NULL),
-        histogramDialog(NULL), shadingDialog(NULL), decoderUpDialog(NULL), decoderVpDialog(NULL), depthDialog(NULL), trackerDialog(NULL){
+SLStudio::SLStudio(QWidget *parent) : QMainWindow(parent), 
+		ui(new Ui::SLStudio),
+        scanWorkerThread(NULL),
+		settings(NULL),
+        histogramDialog(NULL),
+		shadingDialog(NULL),
+		decoderUpDialog(NULL), 
+		decoderVpDialog(NULL),
+		depthDialog(NULL),
+		trackerDialog(NULL)
+{
 
     ui->setupUi(this);
 

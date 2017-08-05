@@ -13,7 +13,6 @@ EncoderPhaseShift4::EncoderPhaseShift4(unsigned int _screenCols, unsigned int _s
 
     // Set N
     N = 4;
-
     // Precompute encoded patterns
     const float pi = M_PI;
     for(unsigned int i=0; i<N; i++){
@@ -43,31 +42,39 @@ void DecoderPhaseShift4::decodeFrames(cv::Mat &up, cv::Mat &vp, cv::Mat &mask, c
     const float pi = M_PI;
 
     std::vector<cv::Mat> fIcomp = pstools::getDFTComponents(frames);
-
     cv::phase(fIcomp[2], -fIcomp[3], up);
-    up *= screenCols/(2.0*pi);
+	up *= screenCols / (2.0*pi);
 
-//    cv::Mat upCopy = up.clone();
-//    cv::bilateralFilter(upCopy, up, 7, 500, 400);
-    //cv::GaussianBlur(up, up, cv::Size(0,0), 3, 3);
-
-    cv::Mat X0, X1, X2;
-    cv::magnitude(fIcomp[0], fIcomp[1], X0);
+	cv::Mat X1;// X0, X2;
+    //cv::magnitude(fIcomp[0], fIcomp[1], X0);
     cv::magnitude(fIcomp[2], fIcomp[3], X1);
-    cv::magnitude(fIcomp[4], fIcomp[5], X2);
-
+    //cv::magnitude(fIcomp[4], fIcomp[5], X2);
+	shading = X1;
+	shading.convertTo(shading, CV_8U);
     // Threshold on high modulation and low energy at wrong frequencies
     //mask = (X1/X0 > 0.30) & (X1 > 100) & (X2 < 50);
     mask = X1 > 20;
 
-    cv::Mat dx, dy;
-    cv::Sobel(up, dx, -1, 1, 0, 3);
-    cv::Sobel(up, dy, -1, 0, 1, 3);
-    cv::Mat edges;
-    cv::magnitude(dx, dy, edges);
+//     cv::Mat dx, dy;
+//     cv::Sobel(up, dx, -1, 1, 0, 3);
+//     cv::Sobel(up, dy, -1, 0, 1, 3);
+//     cv::Mat edges;
+//     cv::magnitude(dx, dy, edges);
+// 
+//     mask = mask & (abs(edges) < 75);
+	/*up = pstools::getPhase4(frames[0], frames[1], frames[2], frames[3]);
+	up *= screenCols/(2.0*pi);
+	cv::GaussianBlur(up, up, cv::Size(0, 0), 3, 3);
 
-    mask = mask & (abs(edges) < 75);
+	shading = pstools::getMagnitude4(frames[0], frames[1], frames[2], frames[3]);
 
-    shading = X1;
-    shading.convertTo(shading, CV_8U);
+	mask.create(shading.size(), cv::DataType<bool>::type);
+	mask = shading > 20;
+	cv::Mat dx, dy;
+	cv::Sobel(up, dx, -1, 1, 0, 3);
+	cv::Sobel(up, dy, -1, 0, 1, 3);
+	cv::Mat edgesUp;
+	cv::magnitude(dx, dy, edgesUp);
+	mask = mask &  (edgesUp < 75);*/
+
 }

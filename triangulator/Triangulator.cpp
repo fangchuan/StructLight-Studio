@@ -15,7 +15,6 @@ Triangulator::Triangulator(CalibrationData _calibration) : calibration(_calibrat
     // Precompute uc, vc maps
     uc.create(calibration.frameHeight, calibration.frameWidth, CV_32F);
     vc.create(calibration.frameHeight, calibration.frameWidth, CV_32F);
-
     for(unsigned int row=0; row<calibration.frameHeight; row++){
         for(unsigned int col=0; col<calibration.frameWidth; col++){
             uc.at<float>(row, col) = col;
