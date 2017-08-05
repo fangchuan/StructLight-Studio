@@ -39,7 +39,23 @@ cv::Mat getPhase(const cv::Mat I1, const cv::Mat I2, const cv::Mat I3){
     return phase;
 
 }
+// Absolute phase from 4 frames
+// 4步相移的相位解调算法
+cv::Mat getPhase4(const cv::Mat I1, const cv::Mat I2, const cv::Mat I3, cv::Mat I4){
 
+	cv::Mat_<float> I1_(I1);
+	cv::Mat_<float> I2_(I2);
+	cv::Mat_<float> I3_(I3);
+	cv::Mat_<float> I4_(I4);
+
+
+	cv::Mat phase;
+
+	// One call approach
+	cv::phase(I1_ - I3_, I2_ - I4_, phase);
+	return phase;
+
+}
 // Absolute magnitude from 3 frames
 cv::Mat getMagnitude(const cv::Mat I1, const cv::Mat I2, const cv::Mat I3){
 
@@ -54,7 +70,22 @@ cv::Mat getMagnitude(const cv::Mat I1, const cv::Mat I2, const cv::Mat I3){
 
     return magnitude;
 }
+// Absolute magnitude from 4 frames
+cv::Mat getMagnitude4(const cv::Mat I1, const cv::Mat I2, const cv::Mat I3, cv::Mat I4){
 
+	cv::Mat_<float> I1_(I1);
+	cv::Mat_<float> I2_(I2);
+	cv::Mat_<float> I3_(I3);
+	cv::Mat_<float> I4_(I4);
+
+
+	cv::Mat magnitude;
+	// One call approach
+	cv::magnitude(I1_ - I3_ , I2_ - I4_, magnitude);
+	magnitude.convertTo(magnitude, CV_8U);
+
+	return magnitude;
+}
 // Absolute phase and magnitude from N frames
 std::vector<cv::Mat> getDFTComponents(const std::vector<cv::Mat> frames){
 
